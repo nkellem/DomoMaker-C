@@ -68,12 +68,12 @@ app.use(cookieParser());
 // and app.use(session{...})
 // BEFORE router
 app.use(csrf());
-app.use((err, req, res, next) => [
+app.use((err, req, res, next) => {
   if (err.code !== 'EBADCSRFTOKEN') return next(err);
-  
+
   console.log('Missing CSRF token');
   return false;
-]);
+});
 
 router(app);
 
